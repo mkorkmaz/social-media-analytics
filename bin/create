@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+BASEDIR=$(dirname $0)
+echo "Creating index..."
+curl -XPUT http://{$1}:9200/sm_stats
+$BASEDIR/users $1
+$BASEDIR/users_log $1
+$BASEDIR/posts $1
+$BASEDIR/posts_log $1
+$BASEDIR/airlines $1

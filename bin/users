@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+echo
+echo "Creating users mapping... "
+curl -XPOST http://{$1}:9200/sm_stats/_mapping/users -d '{
+      "users" : {
+        "properties" : {
+          "accounts" : {
+            "properties" : {
+              "instagram" : {
+                "properties" : {
+                  "follower_count" : {
+                    "type" : "long"
+                  },
+                  "following_count" : {
+                    "type" : "long"
+                  },
+                  "interaction_count" : {
+                    "type" : "long"
+                  },
+                  "post_count" : {
+                    "type" : "long"
+                  },
+                  "user_display_name" : {
+                    "type" : "string"
+                  },
+                  "user_id" : {
+                    "type" : "string"
+                  },
+                  "user_name" : {
+                    "type" : "string"
+                  }
+                }
+              },
+              "twitter" : {
+                "properties" : {
+                  "follower_count" : {
+                    "type" : "long"
+                  },
+                  "following_count" : {
+                    "type" : "long"
+                  },
+                  "interaction_count" : {
+                    "type" : "long"
+                  },
+                  "post_count" : {
+                    "type" : "long"
+                  },
+                  "user_display_name" : {
+                    "type" : "string"
+                  },
+                  "user_id" : {
+                    "type" : "string"
+                  },
+                  "user_name" : {
+                    "type" : "string"
+                  }
+                }
+              }
+            }
+          },
+          "created_at" : {
+            "type" : "date"
+          },
+          "is_active" : {
+            "type" : "long"
+          },
+          "is_deleted" : {
+            "type" : "long"
+          },
+          "username" : {
+            "type" : "string"
+          }
+        }
+      }
+}'

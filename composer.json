@@ -1,0 +1,34 @@
+{
+
+  "name": "mkorkmaz/sma",
+  "type": "library",
+  "description": "Collects basic stats of social media accounts.",
+  "keywords": ["utility","social media analytics", "twitter", "instagram"],
+  "homepage": "https://github.com/mkorkmaz/scm",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Mehmet Korkmaz",
+      "email": "mehmet@mkorkmaz.com",
+      "homepage": "https://mkorkmaz.com"
+    }
+  ],
+  "require": {
+    "php": "^7.0",
+    "abraham/twitteroauth": "^0.7.2",
+    "symfony/console": "^3.2",
+    "soupmix/elasticsearch": "^0.7",
+    "monolog/monolog": "^1.22",
+    "raiym/instagram-php-scraper": "^0.4.5",
+    "facebook/graph-sdk": "^5.4",
+    "guzzlehttp/guzzle": "^6.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "": "src/"
+    },
+    "files" : [
+            "src/bootstrap.php"
+    ]
+  }
+}

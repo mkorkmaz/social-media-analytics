@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+echo
+echo "Creating users log mapping... "
+curl -XPOST http://{$1}:9200/sm_stats/_mapping/users_log -d '
+{
+      "users_log" : {
+        "properties" : {
+          "follower_count" : {
+            "type" : "long"
+          },
+          "following_count" : {
+            "type" : "long"
+          },
+          "post_count" : {
+            "type" : "long"
+          },
+          "sm" : {
+            "type" : "string"
+          },
+          "timestamp" : {
+            "type" : "date"
+          },
+          "uid" : {
+            "type" : "string"
+          },
+          "user_display_name" : {
+            "type" : "string"
+          },
+          "user_id" : {
+            "type" : "string"
+          },
+          "user_name" : {
+            "type" : "string"
+          }
+        }
+      }
+}'

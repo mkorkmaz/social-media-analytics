@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+BASEDIR=$(dirname $0)
+$BASEDIR/console user:op add --username "Turkish Airlines" --twitter turkishairlines --instagram turkishairlines -v
+$BASEDIR/console user:op add --username "KLM" --twitter KLM --instagram klm -v
+$BASEDIR/console user:op add --username "Air France" --twitter airfrance --instagram airfrance -v
+$BASEDIR/console user:op add --username "Lufthansa" --twitter lufthansa --instagram lufthansa -v
+$BASEDIR/console user:op add --username "Qatar" --twitter qatarairways --instagram qatarairways -v
+$BASEDIR/console user:op add --username "Emirates" --twitter emirates --instagram emirates -v
+$BASEDIR/console user:op add --username "Qantas" --twitter Qantas --instagram qantas -v
+$BASEDIR/console user:op add --username "British Airways" --twitter British_Airways --instagram british_airways -v
+$BASEDIR/console user:op add --username "Austrian airlines" --twitter "_austrian" --instagram austrianairlines -v
+$BASEDIR/console user:op add --username "Air Canada" --twitter AirCanada --instagram aircanada -v
+$BASEDIR/console user:op add --username "American Airlines" --twitter AmericanAir --instagram americanair -v
+$BASEDIR/console user:op add --username "Swiss Air" --twitter FlySWISS --instagram flyswiss -v
+$BASEDIR/console user:op add --username "Iberia" --twitter iberia --instagram iberia -v
+$BASEDIR/console user:op add --username "Singapore Airlines" --twitter SingaporeAir --instagram singaporeair -v
+$BASEDIR/console user:op add --username "Etihad Airways" --twitter EtihadAirways --instagram etihadairways -v
+$BASEDIR/console user:op add --username "All Nippon Airways" --twitter FlyANA_official --instagram allnipponairways_official -v
+$BASEDIR/console user:op add --username "United" --twitter united --instagram united -v
+$BASEDIR/console user:op add --username "Scandinavian Airlines" --twitter SAS --instagram flysas -v
+
+

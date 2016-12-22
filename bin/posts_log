@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+echo
+echo "Creating posts log mapping... "
+curl -XPOST http://{$1}:9200/sm_stats/_mapping/posts_log -d '
+{
+      "posts_log" : {
+        "properties" : {
+          "comment_count" : {
+            "type" : "long"
+          },
+          "interaction_count" : {
+            "type" : "long"
+          },
+          "like_count" : {
+            "type" : "long"
+          },
+          "is_active" : {
+            "type" : "long"
+          },
+          "post_id" : {
+            "type" : "string"
+          },
+          "post_type" : {
+            "type" : "string"
+          },
+          "repost_count" : {
+            "type" : "long"
+          },
+          "timestamp" : {
+            "type" : "date"
+          },
+          "user_id" : {
+            "type" : "string"
+          }
+        }
+      }
+}'
+echo
