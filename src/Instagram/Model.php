@@ -60,13 +60,14 @@ class Model
                 'post_type' => 'insta',
                 'like_count'    => (int) $media['likesCount'],
                 'repost_count'  => 0,
+                'is_active'     => 1,
                 'comment_count' => (int) $media['commentsCount'],
                 'interaction_count' => $media['likesCount'] + $media['commentsCount'],
                 'legacy'        => [
                     'insta' => $media
                 ]
             ];
-            if ($is_exists['total'] == 0) {
+            if ($is_exists['total'] === 0) {
                 $this->db->insert('posts', $doc);
             }
             else {

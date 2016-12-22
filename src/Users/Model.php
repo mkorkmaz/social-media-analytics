@@ -111,18 +111,19 @@ class Model
         $params['type'] = 'posts';
         $params['size'] = 1;
         $params['body'] = [
-            "query" => [
+            'query' => [
                 'bool' => [
                     'filter' => [
                         ['term' => ['post_type' => $platform]],
-                        ['term' => ['user_id' => $user_id]]
+                        ['term' => ['user_id' => $user_id]],
+                        ['term' => ['is_active' => 1]]
 
                     ]
                 ]
             ]
         ];
         $params['body']['aggs'] = [
-            'interaction_count' => ['sum' => ['field'=>'interaction_count']]
+            'interaction_count' => ['sum' => ['field' => 'interaction_count']]
         ];
         $results = $db->search($params);
         return (int) $results['aggregations']['interaction_count']['value'];

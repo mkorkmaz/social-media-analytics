@@ -21,7 +21,7 @@ class LatestPostsCommand extends Command
     protected function configure()
     {
         $this
-            // the name of the command (the part after "bin/console")
+            // the name of the command (the part after "bin/sma")
             ->setName('instagram:latest_posts')
             ->addArgument('username', InputArgument::REQUIRED, 'The instagram username of the user.')
             ->addOption(
@@ -31,7 +31,7 @@ class LatestPostsCommand extends Command
                 'Returns data instead of printing.',
                 0
             )
-            // the short description shown while running "php bin/console list"
+            // the short description shown while running "php bin/sma list"
             ->setDescription('Gets user\'s latest posts.')
 
             // the full command description shown when running the command with

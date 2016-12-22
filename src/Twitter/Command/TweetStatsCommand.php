@@ -18,7 +18,7 @@ class TweetStatsCommand extends Command
     protected function configure()
     {
         $this
-            // the name of the command (the part after "bin/console")
+            // the name of the command (the part after "bin/sma")
             ->setName('twitter:tweet_stats')
             ->addOption(
                 'return',
@@ -27,7 +27,7 @@ class TweetStatsCommand extends Command
                 'Returns data instead of printing.',
                 0
             )
-            // the short description shown while running "php bin/console list"
+            // the short description shown while running "php bin/sma list"
             ->setDescription('Updates tweets\' stats.')
 
             // the full command description shown when running the command with
