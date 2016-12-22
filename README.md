@@ -1,0 +1,2 @@
+# social-media-analytics
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/bc5e5177655e4ba18d83301cfbedbaca)](https://www.codacy.com/app/mehmet/social-media-analytics?utm_source=github.com&utm_medium=referral&utm_content=mkorkmaz/social-media-analytics&utm_campaign=badger)
