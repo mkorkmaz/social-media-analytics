@@ -43,7 +43,7 @@ class Model
 
     public function processLatestMedias(string $user_id, array $medias)
     {
-        $now  = time()*100;
+        $now  = microtime();
         foreach ($medias as $media) {
             $is_exists = $this->db->find(
                 'posts',
@@ -74,9 +74,11 @@ class Model
                 unset($doc['timestamp']);
                 $this->db->update('posts',['_id' => $is_exists['data']['_id']], $doc);
             }
+            /* removed for later use
             unset($doc['legacy']);
             $doc['timestamp'] = time()*100;
             $this->db->insert('posts_log', $doc);
+            */
         }
     }
 

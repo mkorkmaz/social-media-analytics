@@ -32,7 +32,8 @@ class TweetStatsCommand extends Command
 
             // the full command description shown when running the command with
             // the "--help" option
-            ->setHelp('This command allows you to get all the tweets\' statistics including follower count, following count and share count...');
+            ->setHelp('This command allows you to get all the tweets\' statistics including follower count,'
+                . ' following count and share count...');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -40,7 +41,7 @@ class TweetStatsCommand extends Command
         $provider = ServiceProvider::getInstance();
         $this->model = Model::factory($provider);
         $return = $input->getOption('return');
-        $output->writeln(date("Y-m-d H:i:s") . ' Updating all the  tweets\' data');
+        $output->writeln(date('Y-m-d H:i:s') . ' Updating all the  tweets\' data');
         $this->model->updateTweetData();
     }
 }

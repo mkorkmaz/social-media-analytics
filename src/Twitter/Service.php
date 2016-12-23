@@ -41,6 +41,10 @@ class Service
         );
     }
 
+    /**
+     * @param array $idBucket
+     * @return array|object
+     */
     public function lookup(array $idBucket)
     {
         return $this->connection->get(

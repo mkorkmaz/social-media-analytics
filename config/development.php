@@ -2,7 +2,7 @@
 
 return [
     'elasticsearch' => [
-        'hosts'     => ["127.0.0.1:9200"],
+        'hosts'     => ['127.0.0.1:9200'],
         'db_name'   => 'sm_stats',
         'options'   => []
     ],

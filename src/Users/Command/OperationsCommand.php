@@ -114,7 +114,9 @@ class OperationsCommand extends Command
             break;
         default:
             $this->logger->error("user:op for {$operation} failed");
-            $output->writeln(date('Y-m-d H:i:s') . ' <error>\n\n  Operation <bg=red;options=bold,underscore>"' . $operation . '"</> not found for user:op!\n</error>');
+            $output->writeln(date('Y-m-d H:i:s')
+                . ' <error>\n\n  Operation <bg=red;options=bold,underscore>"'
+                . $operation . '"</> not found for user:op!\n</error>');
         }
     }
 
@@ -130,18 +132,18 @@ class OperationsCommand extends Command
             $output->writeln(date('Y-m-d H:i:s') . ' User ID: ' . $user_id);
         }
         if (!empty($twitterUserName)) {
-            $output->writeln(date('Y-m-d H:i:s').'Updating Twitter stats');
+            $output->writeln(date('Y-m-d H:i:s').' Updating Twitter stats');
             $this->updateTwitterStats($user_id, $twitterUserName);
 
             $output->writeln(date('Y-m-d H:i:s') . ' Twitter stats updated');
         }
         if (!empty($instagramUserName)) {
-            $output->writeln(date('Y-m-d H:i:s').' Instagram Twitter stats');
+            $output->writeln(date('Y-m-d H:i:s') . ' Instagram Twitter stats');
             $this->updateInstagramStats($user_id, $instagramUserName);
-            $output->writeln(date('Y-m-d H:i:s') . 'Instagram stats updated');
+            $output->writeln(date('Y-m-d H:i:s') . ' Instagram stats updated');
 
         }
-        $output->writeln(date('Y-m-d H:i:s')."Command executed");
+        $output->writeln(date('Y-m-d H:i:s') . ' Command executed');
     }
 
     private function updateTwitterStats(string $user_id, string $twitterUserName)
@@ -193,22 +195,23 @@ class OperationsCommand extends Command
         $instagramUserID = $input->getOption('instagram');
 
         if (empty($twitterUserID|$instagramUserID)) {
-            $output->writeln(date('Y-m-d H:i:s').'<warning>' . ($twitterUserID|$instagramUserID) .' not found.<warning>');
+            $output->writeln(date('Y-m-d H:i:s') . ' <warning>'
+                . ($twitterUserID|$instagramUserID) .' not found.<warning>');
         }
         if (!empty($twitterUserID)) {
-            $output->writeln(date('Y-m-d H:i:s').'Updating Twitter stats');
-            $output->writeln(date('Y-m-d H:i:s')."Twitter latest_posts are fetched.");
+            $output->writeln(date('Y-m-d H:i:s') . ' Updating Twitter stats');
+            $output->writeln(date('Y-m-d H:i:s') . ' Twitter latest_posts are fetched.');
 
             $this->getLatestTwitterPosts($twitterUserID);
         }
         if (!empty($instagramUserID)) {
-            $output->writeln(date('Y-m-d H:i:s').'Instagram Twitter stats');
+            $output->writeln(date('Y-m-d H:i:s') . ' Instagram Twitter stats');
             $this->getLatestInstagramPosts($instagramUserID);
-            $output->writeln(date('Y-m-d H:i:s')."Instagram latest_posts are fetched.");
+            $output->writeln(date('Y-m-d H:i:s') . ' Instagram latest_posts are fetched.');
 
         }
         sleep(1);
-        $output->writeln(date('Y-m-d H:i:s')."Command 'user:latest_posts' executed.");
+        $output->writeln(date('Y-m-d H:i:s') . 'Command "user:latest_posts" executed.');
     }
 
     private function getLatestTwitterPosts(string $user_id)
@@ -258,23 +261,24 @@ class OperationsCommand extends Command
     {
         $users = $this->userModel->getActiveUsers();
         foreach ($users['data'] as $user) {
-            $output->writeln(date('Y-m-d H:i:s:')." {$user['username']} stats will be calculated");
-            $output->writeln(date('Y-m-d H:i:s:').' Twitter...');
+            $output->writeln(date('Y-m-d H:i:s') . " {$user['username']} stats will be calculated");
+            $output->writeln(date('Y-m-d H:i:s') . ' Twitter...');
             $this->updateTwitterStats($user['_id'], $user['accounts']['twitter']['user_name']);
-            $output->writeln(date('Y-m-d H:i:s:').' Instagram...');
+            $output->writeln(date('Y-m-d H:i:s').' Instagram...');
             $this->updateInstagramStats($user['_id'], $user['accounts']['instagram']['user_name']);
         }
-        $output->writeln(date('Y-m-d H:i:s')."Command 'user:op:update_all' executed.");
+        $output->writeln(date('Y-m-d H:i:s') . ' Command "user:op:update_all" executed.');
     }
 
     private function getLatestsAll(InputInterface $input, OutputInterface $output)
     {
 
-        $output->writeln(date('Y-m-d H:i:s')."Command 'user:op:latest_all' execution started.");
+        $output->writeln(date('Y-m-d H:i:s') . ' Command "user:op:latest_all" execution started.');
         $users = $this->userModel->getActiveUsers();
 
         foreach ($users['data'] as $user) {
-            $output->writeln(date('Y-m-d H:i:s')."Fetching ".$user['accounts']['twitter']['user_name'] . ' tweets...');
+            $output->writeln(date('Y-m-d H:i:s')
+                . ' Fetching ' . $user['accounts']['twitter']['user_name'] . ' tweets...');
 
             $command = $this->getApplication()->find('user:op');
             $arguments = array(
@@ -285,7 +289,8 @@ class OperationsCommand extends Command
             $userStatsInput = new ArrayInput($arguments);
 
             $returnCode = $command->run($userStatsInput, $output);
-            $output->writeln(date('Y-m-d H:i:s')."Fetching ".$user['accounts']['twitter']['user_name'] . ' instagram medias...');
+            $output->writeln(date('Y-m-d H:i:s') . 'Fetching '
+                . $user['accounts']['twitter']['user_name'] . ' instagram medias...');
 
             $command = $this->getApplication()->find('user:op');
             $arguments = array(
@@ -296,7 +301,7 @@ class OperationsCommand extends Command
             $userStatsInput = new ArrayInput($arguments);
             $returnCode = $command->run($userStatsInput, $output);
         }
-        $output->writeln(date('Y-m-d H:i:s')."Command 'user:op:latest_all' executed.");
+        $output->writeln(date('Y-m-d H:i:s') . 'Command "user:op:latest_all" executed.');
 
     }
 }

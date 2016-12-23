@@ -58,10 +58,10 @@ class LatestPostsCommand extends Command
         $username = $input->getArgument('username');
         $return = $input->getOption('return');
         if ($return === 0) {
-            $output->writeln(date("Y-m-d H:is:").'User ID: ' . $username);
+            $output->writeln(date('Y-m-d H:i:s') . ' User ID: ' . $username);
         }
         if (empty($username)) {
-            $output->writeln(date("Y-m-d H:is:").'<error>Username is empty:</error>');
+            $output->writeln(date('Y-m-d H:i:s') . ' <error>Username is empty:</error>');
 
         }
         $medias = $this->instagramModel->getLatestPosts($username);

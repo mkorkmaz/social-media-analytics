@@ -1,35 +1,79 @@
 #!/usr/bin/env bash
 echo
-echo "Creating users log mapping... "
-curl -XPOST http://{$1}:9200/sm_stats/_mapping/users_log -d '
-{
-      "users_log" : {
+echo "Creating users mapping... "
+curl -XPOST http://{$1}:9200/sm_stats/_mapping/users -d '{
+      "users" : {
         "properties" : {
-          "follower_count" : {
-            "type" : "long"
+          "accounts" : {
+            "properties" : {
+              "instagram" : {
+                "properties" : {
+                  "follower_count" : {
+                    "type" : "long"
+                  },
+                  "following_count" : {
+                    "type" : "long"
+                  },
+                  "interaction_count" : {
+                    "type" : "long"
+                  },
+                  "post_count" : {
+                    "type" : "long"
+                  },
+                  "user_display_name" : {
+                    "type" : "string"
+                  },
+                  "user_id" : {
+                    "type" : "string"
+                  },
+                  "user_name" : {
+                    "type" : "string"
+                  }
+                }
+              },
+              "twitter" : {
+                "properties" : {
+                  "follower_count" : {
+                    "type" : "long"
+                  },
+                  "following_count" : {
+                    "type" : "long"
+                  },
+                  "interaction_count" : {
+                    "type" : "long"
+                  },
+                  "post_count" : {
+                    "type" : "long"
+                  },
+                  "user_display_name" : {
+                    "type" : "string"
+                  },
+                  "user_id" : {
+                    "type" : "string"
+                  },
+                  "user_name" : {
+                    "type" : "string"
+                  }
+                }
+              }
+            }
           },
-          "following_count" : {
-            "type" : "long"
-          },
-          "post_count" : {
-            "type" : "long"
-          },
-          "sm" : {
-            "type" : "string"
-          },
-          "timestamp" : {
+          "created_at" : {
             "type" : "date"
           },
-          "uid" : {
+          "is_active" : {
+            "type" : "long"
+          },
+          "is_deleted" : {
+            "type" : "long"
+          },
+          "username" : {
             "type" : "string"
           },
-          "user_display_name" : {
+          "log_type" : {
             "type" : "string"
           },
-          "user_id" : {
-            "type" : "string"
-          },
-          "user_name" : {
+          "legend" : {
             "type" : "string"
           }
         }

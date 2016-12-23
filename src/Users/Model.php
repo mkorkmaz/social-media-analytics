@@ -40,7 +40,7 @@ class Model
             $doc['accounts']['twitter'] = [
                 'user_id'           => (string) 0,
                 'user_name'         => (string) $twitterUserName,
-                'user_display_name' => (string) "",
+                'user_display_name' => (string) '',
                 'follower_count'    => 0,
                 'following_count'   => 0,
                 'post_count'        => 0,
@@ -52,7 +52,7 @@ class Model
             $doc['accounts']['instagram'] = [
                 'user_id'           => (string) 0,
                 'user_name'         => (string) $instagramUserName,
-                'user_display_name' => (string) "",
+                'user_display_name' => (string) '',
                 'follower_count'    => 0,
                 'following_count'   => 0,
                 'post_count'        => 0,

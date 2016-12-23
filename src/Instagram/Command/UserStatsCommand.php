@@ -41,7 +41,7 @@ class UserStatsCommand extends Command
         $username = $input->getArgument('username');
         $return = $input->getOption('return');
         if ($return === 0) {
-            $output->writeln(date("Y-m-d H:is:").'Username: ' . $username);
+            $output->writeln(date('Y-m-d H:is:') . ' Username: ' . $username);
         }
         $provider = ServiceProvider::getInstance();
         $this->model = Model::factory($provider);

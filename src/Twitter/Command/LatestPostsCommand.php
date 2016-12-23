@@ -36,7 +36,8 @@ class LatestPostsCommand extends Command
 
             // the full command description shown when running the command with
             // the "--help" option
-            ->setHelp('This command allows you to get twitter user\'s statistics including follower count, following count and share count...');
+            ->setHelp('This command allows you to get twitter user\'s statistics including follower count, '
+                . 'following count and share count...');
     }
 
     private function setServices(

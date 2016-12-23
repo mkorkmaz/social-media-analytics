@@ -6,4 +6,4 @@ $BASEDIR/users $1
 $BASEDIR/users_log $1
 $BASEDIR/posts $1
 $BASEDIR/posts_log $1
-$BASEDIR/airlines $1
+$BASEDIR/example $1
