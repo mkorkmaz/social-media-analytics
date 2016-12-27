@@ -43,7 +43,7 @@ class Model
 
     public function processLatestMedias(string $user_id, array $medias)
     {
-        $now  = microtime();
+        $now  = time() * 100; // epoch_millis
         foreach ($medias as $media) {
             $is_exists = $this->db->find(
                 'posts',

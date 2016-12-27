@@ -66,6 +66,12 @@ class OperationsCommand extends Command
                 InputOption::VALUE_OPTIONAL,
                 'User\'s Instagram user name or id.'
             )
+            ->addOption(
+                'log_type',
+                'l',
+                InputOption::VALUE_OPTIONAL,
+                'Log type. Enum:[6h,1d,1w,1m,1y]'
+            )
             // the short description shown while running "php bin/sma list"
             ->setDescription('Make user operations.')
 
@@ -104,11 +110,14 @@ class OperationsCommand extends Command
             $this->add($input, $output);
             break;
         case 'update_all':
-                $this->updateAll($input, $output);
-                break;
+            $this->updateAll($input, $output);
+            break;
         case 'latest_all':
-                $this->getLatestsAll($input, $output);
-                break;
+            $this->getLatestsAll($input, $output);
+            break;
+        case 'update_log':
+            $this->updateLog($input, $output);
+            break;
         case 'latest_posts':
             $this->latestPosts($input, $output);
             break;
@@ -200,18 +209,17 @@ class OperationsCommand extends Command
         }
         if (!empty($twitterUserID)) {
             $output->writeln(date('Y-m-d H:i:s') . ' Updating Twitter stats');
-            $output->writeln(date('Y-m-d H:i:s') . ' Twitter latest_posts are fetched.');
-
             $this->getLatestTwitterPosts($twitterUserID);
+            $output->writeln(date('Y-m-d H:i:s') . ' Twitter latest_posts are fetched.');
         }
         if (!empty($instagramUserID)) {
-            $output->writeln(date('Y-m-d H:i:s') . ' Instagram Twitter stats');
+            $output->writeln(date('Y-m-d H:i:s') . ' Updating Instagram stats');
             $this->getLatestInstagramPosts($instagramUserID);
             $output->writeln(date('Y-m-d H:i:s') . ' Instagram latest_posts are fetched.');
 
         }
         sleep(1);
-        $output->writeln(date('Y-m-d H:i:s') . 'Command "user:latest_posts" executed.');
+        $output->writeln(date('Y-m-d H:i:s') . ' Command "user:latest_posts" executed.');
     }
 
     private function getLatestTwitterPosts(string $user_id)
@@ -267,7 +275,29 @@ class OperationsCommand extends Command
             $output->writeln(date('Y-m-d H:i:s').' Instagram...');
             $this->updateInstagramStats($user['_id'], $user['accounts']['instagram']['user_name']);
         }
+        sleep(1);
+
         $output->writeln(date('Y-m-d H:i:s') . ' Command "user:op:update_all" executed.');
+    }
+
+
+    private function updateLog(InputInterface $input, OutputInterface $output)
+    {
+        $logType = $input->getOption('log_type');
+        $users = $this->userModel->getActiveUsers();
+        foreach ($users['data'] as $user) {
+            $output->writeln(date('Y-m-d H:i:s') . " {$user['username']} stats will be calculated");
+            $output->writeln(date('Y-m-d H:i:s') . ' Twitter...');
+            $this->updateTwitterStats($user['_id'], $user['accounts']['twitter']['user_name']);
+            $output->writeln(date('Y-m-d H:i:s').' Instagram...');
+            $this->updateInstagramStats($user['_id'], $user['accounts']['instagram']['user_name']);
+        }
+        sleep(1);
+        $users = $this->userModel->getActiveUsers();
+        foreach ($users['data'] as $user) {
+            $this->userModel->updateLog($logType, $user);
+        }
+        $output->writeln(date('Y-m-d H:i:s') . ' Command "user:op:update_log" executed.');
     }
 
     private function getLatestsAll(InputInterface $input, OutputInterface $output)
@@ -289,7 +319,7 @@ class OperationsCommand extends Command
             $userStatsInput = new ArrayInput($arguments);
 
             $returnCode = $command->run($userStatsInput, $output);
-            $output->writeln(date('Y-m-d H:i:s') . 'Fetching '
+            $output->writeln(date('Y-m-d H:i:s') . ' Fetching '
                 . $user['accounts']['twitter']['user_name'] . ' instagram medias...');
 
             $command = $this->getApplication()->find('user:op');
@@ -301,7 +331,7 @@ class OperationsCommand extends Command
             $userStatsInput = new ArrayInput($arguments);
             $returnCode = $command->run($userStatsInput, $output);
         }
-        $output->writeln(date('Y-m-d H:i:s') . 'Command "user:op:latest_all" executed.');
+        $output->writeln(date('Y-m-d H:i:s') . ' Command "user:op:latest_all" executed.');
 
     }
 }

@@ -46,7 +46,7 @@ class Model
 
     public function processLatestTweets(string $user_id, array $tweets)
     {
-        $now  = microtime();
+        $now  = time() * 100; // epoch_millis
         foreach ($tweets as $tweet) {
             if($tweet['retweeted'] === true) {
                 continue;
@@ -90,7 +90,7 @@ class Model
     public function updateTweetData()
     {
         $aMonthAgoDate = new DateTime('30 days ago');
-        $aMonthAgo = $aMonthAgoDate->getTimestamp() * 100; // WE need microseconds here
+        $aMonthAgo = $aMonthAgoDate->getTimestamp() * 100; // WE need milliseconds here
         $tweets = $this->db->find(
             'posts',
                 ['is_active' => 1, 'timestamp__gte' => $aMonthAgo],
@@ -132,7 +132,7 @@ class Model
                         ];
                         $this->db->update('posts', ['post_id' => $id_str, 'post_type' => 'tweet'], $doc);
                         unset($doc['legacy']);
-                        $doc['timestamp'] = microtime();
+                        $doc['timestamp'] = time() * 100; // epoch_millis
                         $this->db->insert('posts_log', $doc);
                     }
                 }

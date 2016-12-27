@@ -35,10 +35,18 @@ class Service
 
     public function getLatestPost(string $user_id)
     {
-        return $this->connection->get(
-            'statuses/user_timeline',
-            ['count' => 200, 'user_id' => $user_id, 'include_rts' => false, 'exclude_replies' => true]
-        );
+        try {
+
+            return $this->connection->get(
+                'statuses/user_timeline',
+                ['count' => 200, 'user_id' => $user_id, 'include_rts' => false, 'exclude_replies' => true]
+            );
+        }
+        catch (\Exception $e) {
+            var_dump($e->getMessage());
+        }
+
+
     }
 
     /**

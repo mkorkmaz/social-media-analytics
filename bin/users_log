@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 echo
-echo "Creating users mapping... "
-curl -XPOST http://{$1}:9200/sm_stats/_mapping/users -d '{
-      "users" : {
+echo "Creating users_log mapping... "
+curl -XPOST http://{$1}:9200/sm_stats/_mapping/users_log -d '{
+      "users_log" : {
         "properties" : {
           "accounts" : {
             "properties" : {
@@ -58,23 +58,23 @@ curl -XPOST http://{$1}:9200/sm_stats/_mapping/users -d '{
               }
             }
           },
-          "created_at" : {
+          "timestamp" : {
             "type" : "date"
-          },
-          "is_active" : {
-            "type" : "long"
-          },
-          "is_deleted" : {
-            "type" : "long"
           },
           "username" : {
             "type" : "string"
           },
           "log_type" : {
-            "type" : "string"
+            "type" : "string",
+            "index" : "not_analyzed"
+          },
+          "parent_id" : {
+            "type" : "string",
+            "index" : "not_analyzed"
           },
           "legend" : {
-            "type" : "string"
+            "type" : "string",
+            "index" : "not_analyzed"
           }
         }
       }

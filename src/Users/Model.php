@@ -33,7 +33,7 @@ class Model
             'accounts'      => [],
             'is_active'     => 1,
             'is_deleted'    => 0,
-            'created_at'    => time() * 100 // ES timestamp uses microseconds
+            'created_at'    => time() * 100 // epoch_millis
         ];
 
         if (!empty($twitterUserName)) {
@@ -77,11 +77,6 @@ class Model
         $interactionsCount = $this->getInteractionsCount('tweet', $data['user_id']);
         $doc['accounts']['twitter']['interaction_count']       = $interactionsCount;
         $this->db->update('users', ['_id' => $user_id], $doc);
-        $log = $doc['accounts']['twitter'];
-        $log['timestamp'] = time()*100;
-        $log['sm'] = 'twitter';
-        $log['uid'] = $user_id;
-        $this->db->insert('users_log', $log);
     }
 
     public function updateInstagramStats(string $user_id, array $data)
@@ -96,11 +91,6 @@ class Model
         $interactionsCount = $this->getInteractionsCount('insta', $data['user_id']);
         $doc['accounts']['instagram']['interaction_count']       = $interactionsCount;
         $this->db->update('users', ['_id' => $user_id], $doc);
-        $log = $doc['accounts']['instagram'];
-        $log['timestamp'] = time()*100;
-        $log['sm'] = 'instagram';
-        $log['uid'] = $user_id;
-        $this->db->insert('users_log', $log);
     }
 
     private function getInteractionsCount(string $platform, string $user_id)
@@ -132,5 +122,42 @@ class Model
     public function getActiveUsers()
     {
         return $this->db->find('users', ['is_active' => 1, 'is_deleted' => 0], null, null, 0, 1000 );
+    }
+
+    public function updateLog(string $logType, array $user)
+    {
+        $now  = time() * 100; // epoch_millis
+        $legend = $this->determineLegend($logType);
+        echo "\nL: ".$legend;
+        $logData                = $user;
+        $logData['legend']      = $legend;
+        $logData['timestamp']   = $now;
+        $logData['log_type']    = $logType;
+        $logData['parent_id']   = $logData['_id'];
+        unset($logData['is_active'], $logData['is_deleted'], $logData['created_at'], $logData['_id']);
+        $this->db->insert('users_log', $logData);
+    }
+
+    private function determineLegend(string $logType)
+    {
+        echo "\nD: ".date('Y-m-d H:i:s');
+        switch ($logType) {
+            case '1d':
+                return date('Y-m-d', strtotime('-1 day'));
+                break;
+            case '1w':
+                return date('Y-m-d', strtotime('-1 day'));
+                break;
+            case '1m':
+                return date('Y-m', strtotime('-1 day'));
+                break;
+            case '1y':
+                return date('Y', strtotime('-1 day'));
+                break;
+            case '6h':
+            default:
+            return date('Y-m-d H', strtotime('-30 minutes'));
+                break;
+        }
     }
 }
