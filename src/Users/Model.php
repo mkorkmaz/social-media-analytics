@@ -128,7 +128,6 @@ class Model
     {
         $now  = time() * 100; // epoch_millis
         $legend = $this->determineLegend($logType);
-        echo "\nL: ".$legend;
         $logData                = $user;
         $logData['legend']      = $legend;
         $logData['timestamp']   = $now;
@@ -140,7 +139,6 @@ class Model
 
     private function determineLegend(string $logType)
     {
-        echo "\nD: ".date('Y-m-d H:i:s');
         switch ($logType) {
             case '1d':
                 return date('Y-m-d', strtotime('-1 day'));

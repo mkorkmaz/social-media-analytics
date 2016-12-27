@@ -90,7 +90,7 @@ class Model
     public function updateTweetData()
     {
         $aMonthAgoDate = new DateTime('30 days ago');
-        $aMonthAgo = $aMonthAgoDate->getTimestamp() * 100; // WE need milliseconds here
+        $aMonthAgo = $aMonthAgoDate->getTimestamp() * 100; // epoch millis
         $tweets = $this->db->find(
             'posts',
                 ['is_active' => 1, 'timestamp__gte' => $aMonthAgo],
