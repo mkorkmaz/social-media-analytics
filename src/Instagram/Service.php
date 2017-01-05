@@ -32,7 +32,14 @@ class Service
 
     public function getLatestPosts(string $username)
     {
+        $userInfo = Instagram::getAccount($username);
         $medias = Instagram::getMedias($username, 150);
+
+        $nofMedias = count($medias);
+        for($i=0; $i < $nofMedias; $i++) {
+            $medias[$i]['username'] = $userInfo['username'];
+            $medias[$i]['profilePicUrl'] = $userInfo['profilePicUrl'];
+        }
         return $medias;
     }
 }

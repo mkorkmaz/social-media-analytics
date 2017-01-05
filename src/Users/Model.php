@@ -154,7 +154,7 @@ class Model
                 break;
             case '6h':
             default:
-            return date('Y-m-d H', strtotime('-30 minutes'));
+            return date('Y-m-d H', strtotime('-1 minutes'));
                 break;
         }
     }
