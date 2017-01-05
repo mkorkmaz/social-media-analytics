@@ -37,8 +37,8 @@ class Service
 
         $nofMedias = count($medias);
         for($i=0; $i < $nofMedias; $i++) {
-            $medias[$i]['username'] = $userInfo['username'];
-            $medias[$i]['profilePicUrl'] = $userInfo['profilePicUrl'];
+            $medias[$i]->username = $userInfo->username;
+            $medias[$i]->profilePicUrl = $userInfo->profilePicUrl;
         }
         return $medias;
     }
